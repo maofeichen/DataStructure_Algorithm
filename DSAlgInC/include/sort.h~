@@ -1,0 +1,10 @@
+/*
+ * sort.h
+ */
+
+#ifndef SORT_H
+#define SORT_H
+
+void sortInsert(int []data, int SIZE);
+
+#endif
