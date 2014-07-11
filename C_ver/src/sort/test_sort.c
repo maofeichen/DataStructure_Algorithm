@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include "../../include/sort/sort.h"
 
-#define TEST_ARRAY_SIZE 50000
+#define TEST_ARRAY_SIZE 100000
 #define RAND_RANGE 1000
 
 int main(int argc, char *argv[])
@@ -21,10 +21,17 @@ int main(int argc, char *argv[])
 	for(int i = 0; i < TEST_ARRAY_SIZE; i++)
 		test_ary[i] = rand() % RAND_RANGE;
 
-#define SORT_INSERT
+#define DEBUG
+
+#define SORT_MERGE
+// #define SORT_INSERT
 
 #ifdef SORT_INSERT
 	sort_insert(test_ary, TEST_ARRAY_SIZE);
+#endif
+
+#ifdef SORT_MERGE
+	sort_merge(test_ary, 0, TEST_ARRAY_SIZE - 1);
 #endif
 
 	/* print result after sorting */

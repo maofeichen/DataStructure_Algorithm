@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include "../../include/sort/sort.h"
 
-inline void swap(int *, int *);
+void swap(int *, int *);
 
 /* insert sort */
 void sort_insert(int data[], size_t len){
