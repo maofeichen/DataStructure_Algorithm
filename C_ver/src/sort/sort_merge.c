@@ -24,12 +24,18 @@
  * [4,3]	[2,1]
  *
  * 2 divide
- * [4] [3] [2] [1]
+ * [4] [3] [2,1]
  *
  * 1 merge
+ * [3,4]	[2,1]
+ *
+ * 3rd divide
+ * [3,4]	[2] [1]
+ *
+ * 2nd merge
  * [3,4]	[1,2]
  *
- * 2 merge
+ * 3rd merge
  * [1,2,3,4]
  * *****************************************************************************
  */
@@ -83,7 +89,6 @@ void sort_merge(int data[], int i_start, int i_end)
 {
 	if(i_start < i_end) {
 		int i_middle = (i_start + i_end) / 2;
-// #define DEBUG
 #ifdef DEBUG
 		printf("the i_middle is: %d\n", i_middle);
 #endif
