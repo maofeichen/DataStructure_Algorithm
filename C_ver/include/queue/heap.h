@@ -12,5 +12,6 @@
 
 void disp_heap(int data[], unsigned size);
 void max_heapify(int data[], unsigned size, unsigned idx_root);
+void build_max_heap(int data[], unsigned size);
 
 #endif

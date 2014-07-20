@@ -17,6 +17,7 @@
 
 void disp_heap(int data[], unsigned size);
 void max_heapify(int data[], unsigned size, unsigned idx_root);
+void build_max_heap(int data[], unsigned size);
 extern void swap(int *a, int *b);
 
 /*
@@ -74,18 +75,45 @@ void max_heapify(int data[], unsigned size, unsigned idx_root)
 	 * stop */
 	unsigned idx_largest = idx_root;	
 
-	if (idx_lchild < size - 1)
+	if (idx_lchild <= size - 1)
 		if (data[idx_root] < data[idx_lchild])
 			idx_largest = idx_lchild;
 		else
 			idx_largest = idx_root;
 
-	if(idx_rchild < size - 1)
+	if(idx_rchild <= size - 1)
 		if(data[idx_largest] < data[idx_rchild])
 			idx_largest = idx_rchild;
 
 	if(idx_largest != idx_root ) {
 		swap(&data[idx_largest], &data[idx_root]);
 		max_heapify(data, size, idx_largest);
+	}
+}
+
+/*
+ * @param data
+ *	the input integer array
+ * @param size
+ *	the size the input array
+ *
+ * build max heap from normal array, the idea is that from the first node
+ * which is not leaf, iteratly call max_heapy, until to the first node
+ * of the binary heap. Thus, it is a buttom-up approach.
+ * Take the example from CLRS:
+ *						4
+ *				1				3
+ *		2			16		9		10
+ *	14		8	7
+ * The algorithm begin with node of val 16, becus its left and right subtree
+ * are considered hepify. Then node of val 2, 3, 1, and the final 4
+ */
+void build_max_heap(int data[], unsigned size)
+{
+	unsigned idx_node = floor( size / 2 );
+	int idx_ary = idx_node - 1;
+
+	for(; idx_ary >= 0; idx_ary--) {
+		max_heapify(data, size, idx_ary);
 	}
 }
