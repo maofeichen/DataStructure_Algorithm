@@ -111,6 +111,7 @@ void max_heapify(int data[], unsigned size, unsigned idx_root)
 void build_max_heap(int data[], unsigned size)
 {
 	unsigned idx_node = floor( size / 2 );
+	// index for loop can't be unsigned, otherwise loop forever
 	int idx_ary = idx_node - 1;
 
 	for(; idx_ary >= 0; idx_ary--) {
