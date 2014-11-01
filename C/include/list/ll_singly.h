@@ -7,11 +7,11 @@
  */
   
 #ifndef LL_SINGLY_H 
-#define LL_SINGLY_H  i
+#define LL_SINGLY_H  
 
 typedef enum {FALSE = 0, TRUE = 1} bool;
 
-typedef Union data {
+typedef union data {
 	int i;
 	float f;
 	char ch;
@@ -19,16 +19,18 @@ typedef Union data {
 } data_t;
 
 typedef struct node {
-	data_t val;
-	struct *node next;
+	int elem;
+	struct node *next;
 } node_t;
 
 node_t *create_list();
-node_t *insert_node();
-bool search_node();
-void delete_node();
-void delete_list(node_t *root);
-void print_list(node_t *root);
+void insert_after(int, node_t *);
+void insert_begin(int, node_t *);
+void insert_tail(int, node_t *);
+node_t *find_node(int, node_t *);
+bool delete_node(int, node_t *);
+void delete_list(node_t *);
+void print_list(node_t *);
 
 /*
 typedef struct node *ptr_node;

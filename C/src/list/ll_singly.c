@@ -1,20 +1,100 @@
-/* 
- * This is a link list implementation, reference by the Data Structure and Algorithm Analysis in C 
+/*
+ * **********************************************************************
+ * File:	ll_singly.c
+ * Dest:	singly linked list 
+ * author:	mchen
+ * **********************************************************************
  */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/SimpleLinkList.h"
+#include "../../include/list/ll_singly.h"
 
-typedef struct node *ptr_node;
-typedef ptr_node LIST;
-typedef ptr_node NODE;
+node_t *create_list(){
+	node_t *head;
+	if((head = malloc(sizeof(node_t) ) ) == NULL)
+		fprintf(stderr, "fail to create list\n");
+	head->elem = -1;
+	head->next = NULL;
+	return head;
+}
 
-struct node{
-   int element;
-   ptr_node next;
- };
+/* insert after a node */
+void insert_after(int val, node_t *node){
+	node_t *new;
+	if((new = malloc(sizeof(node_t) ) ) == NULL)
+		fprintf(stderr, "fail to create node\n");
+	new->elem = val;
+	new->next = node->next;
+	node->next = new;
+}
 
+void insert_begin(int val, node_t *list){
+	node_t *new;
+	if((new = malloc(sizeof(node_t) ) ) == NULL)
+		fprintf(stderr, "fail to create node\n");
+	new->elem = val;
+	new->next = list->next;
+	list->next = new;
+}
+
+void insert_tail(int val, node_t *list){
+	node_t *new, *tail;
+	tail = list;
+	while(tail->next != NULL)
+		tail = tail->next;
+
+	if((new = malloc(sizeof(node_t) ) ) == NULL)
+		fprintf(stderr, "fail to create node\n");
+	new->elem = val;
+	new->next = NULL;
+	tail->next = new;
+}
+
+node_t *find_node(int val, node_t *list){
+	node_t *curr = list;
+	while(curr != NULL && curr->elem != val)
+		curr = curr->next;
+	return curr;
+}
+
+bool delete_node(int val, node_t *list){
+	node_t *prev = NULL;
+	node_t *curr = list;
+	while(curr->elem != val && curr != NULL) {
+		prev = curr;
+		curr = curr->next;
+	}
+	if(curr == NULL)
+		return FALSE;
+	else {
+		prev->next = curr->next;
+		free(curr);
+		return TRUE;
+	}
+}
+
+void delete_list(node_t *list){
+	node_t *prev = NULL;
+	node_t *curr = list;
+	while(curr != NULL){
+		prev = curr;
+		curr = curr->next;
+		free(prev);
+	}
+}
+
+void print_list(node_t *list){
+	node_t *curr = list;
+	printf("Singly list: ");
+	while(curr != NULL) {
+		printf("%d->", curr->elem);
+		curr = curr->next;
+	}
+	printf("\n");
+}
+
+#if 0
 /*Test empty list*/
 int isEmpty(LIST L){
    return (L->next == NULL);
@@ -151,3 +231,4 @@ void travel_List(LIST L){
    printf("%d", node -> element);
    printf("\n");
 }
+#endif
