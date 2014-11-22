@@ -9,6 +9,7 @@
 #ifndef LL_SINGLY_H 
 #define LL_SINGLY_H  
 
+#define ARY_SZ 20
 typedef enum {FALSE = 0, TRUE = 1} bool;
 
 typedef union data {
@@ -16,6 +17,7 @@ typedef union data {
 	float f;
 	char ch;
 	double db;
+	char ch_ary[20];
 } data_t;
 
 typedef struct node {
@@ -27,24 +29,8 @@ node_t *create_list();
 void insert_after(int, node_t *);
 void insert_begin(int, node_t *);
 void insert_tail(int, node_t *);
-node_t *find_node(int, node_t *);
-bool delete_node(int, node_t *);
+node_t *find_node(int, node_t *, bool);
+bool delete_node(int, node_t *, bool);
 void delete_list(node_t *);
 void print_list(node_t *);
-
-/*
-typedef struct node *ptr_node;
-typedef ptr_node LIST;
-typedef ptr_node position;
-
-int isEmpty(LIST L);
-int isLast(position p, LIST L);
-LIST createList(void);
-position find(int val, LIST L);
-position findPrevNode(int val, LIST L);
-void delete(int val, LIST L);
-void insertAfter(int val, LIST L, position p);
-void InsertAtTail(int item, LIST L); // not implement 
-void deleteList(LIST L);
-*/
 #endif

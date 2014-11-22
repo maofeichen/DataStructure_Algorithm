@@ -12,16 +12,16 @@
 
 int main(int argc, char *argv[]) {
 	node_t *list= create_list();
-
+	bool is_numr = TRUE;
 	// insert 0x1
 	insert_begin(0x1, list);
 	print_list(list);
-	assert(find_node(0x1, list) == list->next);
+	assert(find_node(0x1, list, is_numr) == list->next);
 
 	// insert 0x2
 	insert_tail(0x2, list);
 	print_list(list);
-	assert(find_node(0x2, list) != NULL);
+	assert(find_node(0x2, list, is_numr) != NULL);
 
 	// insert 0x3, 0x4, 0x5
 	insert_tail(0x3, list);
@@ -29,9 +29,9 @@ int main(int argc, char *argv[]) {
 	insert_tail(0x5, list);
 	print_list(list);
 
-	delete_node(0x3, list);
+	delete_node(0x3, list, is_numr);
 	print_list(list);
-	assert(find_node(0x3, list) == NULL);
+	assert(find_node(0x3, list, is_numr) == NULL);
 
 	delete_list(list);	
 	return 0;
