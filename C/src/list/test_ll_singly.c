@@ -11,10 +11,9 @@
 #include "../../include/list/ll_singly.h"
 
 int main(int argc, char *argv[]) {
-	node_t *list= create_list();
-	bool is_numr = TRUE;
+	node_t *list= create_list(INT_T);
 	// insert 0x1
-	insert_begin(0x1, list);
+	insert_begin(0x1, list, INT_T);
 	print_list(list);
 	assert(find_node(0x1, list, is_numr) == list->next);
 
