@@ -10,6 +10,7 @@
 #define LL_SINGLY_H  
 
 #define ARRAY_SZ 20
+
 typedef enum {FALSE = 0, TRUE = 1} bool;
 typedef enum {T_INT, T_STR} type_t;
 
@@ -26,12 +27,13 @@ typedef struct node {
 	struct node *next;
 } node_t;
 
+data_t create_elem(void *, type_t);
 node_t *create_list(type_t);
-void insert_after(data_t, node_t *, type_t);
-void insert_begin(data_t, node_t *, type_t);
-void insert_tail(data_t, node_t *, type_t);
-node_t *find_node(data_t, node_t *, type_t);
-bool delete_node(data_t, node_t *, type_t);
+void insert_after(void *, node_t *, type_t);
+void insert_begin(void *, node_t *, type_t);
+void insert_tail(void *, node_t *, type_t);
+node_t *find_node(void *, node_t *, type_t);
+bool delete_node(void *, node_t *, type_t);
 void delete_list(node_t *);
 void print_list(node_t *, type_t);
 #endif

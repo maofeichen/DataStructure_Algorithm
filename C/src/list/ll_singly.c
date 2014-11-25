@@ -13,9 +13,22 @@
 
 void err(void);
 node_t *create_node();
-node_t *insert_new(data_t val, type_t t);
+node_t *insert_new(void *val, type_t t);
 int cmp(data_t *, data_t *, type_t t);
 int num_cmp(void *, void *);
+
+data_t create_elem(void *val, type_t t){
+	data_t elem;
+	switch(t){
+		case T_INT: elem.i = *(int *)val; break;
+		case T_STR: 
+			strncpy(elem.ch_ary, (char *)val, ARRAY_SZ - 1);
+			elem.ch_ary[ARRAY_SZ-1] = '\0';	
+			break;
+		default: err();
+	}
+	return elem;
+}
 
 node_t *create_list(type_t t){
 	node_t *head = create_node();
@@ -29,19 +42,19 @@ node_t *create_list(type_t t){
 }
 
 /* insert after a node */
-void insert_after(data_t val, node_t *node, type_t t){
+void insert_after(void *val, node_t *node, type_t t){
 	node_t *new = insert_new(val, t);
 	new->next = node->next;
 	node->next = new;
 }
 
-void insert_begin(data_t val, node_t *list, type_t t){
+void insert_begin(void *val, node_t *list, type_t t){
 	node_t *new = insert_new(val, t);
 	new->next = list->next;
 	list->next = new;
 }
 
-void insert_tail(data_t val, node_t *list, type_t t){
+void insert_tail(void *val, node_t *list, type_t t){
 	node_t *new, *tail;
 	tail = list;
 	while(tail->next != NULL)
@@ -52,18 +65,20 @@ void insert_tail(data_t val, node_t *list, type_t t){
 	tail->next = new;
 }
 
-node_t *find_node(data_t val, node_t *list, type_t t){
+node_t *find_node(void *val, node_t *list, type_t t){
 	node_t *curr = list;
+	data_t elem = create_elem(val, t);
 //	while(curr != NULL && curr->elem != val)
-	while(curr != NULL && cmp(&curr->elem, &val, t) != 0)
+	while(curr != NULL && cmp(&curr->elem, &elem, t) != 0)
 		curr = curr->next;
 	return curr;
 }
 
-bool delete_node(data_t val, node_t *list, type_t t){
+bool delete_node(void *val, node_t *list, type_t t){
+	data_t elem = create_elem(val, t);
 	node_t *prev = NULL;
 	node_t *curr = list;
-	while(curr != NULL && cmp(&curr->elem, &val, t) != 0){
+	while(curr != NULL && cmp(&curr->elem, &elem, t) != 0){
 		prev = curr;
 		curr = curr->next;
 	}
@@ -109,12 +124,12 @@ inline node_t *create_node(){
 	return new;
 }
 
-inline node_t *insert_new(data_t val, type_t t){
+inline node_t *insert_new(void *val, type_t t){
 	node_t *new = create_node();
 	switch(t){
-		case T_INT: new->elem.i = val.i; break;
+		case T_INT: new->elem.i = *(int *)val; break;
 		case T_STR: 
-			strncpy(new->elem.ch_ary, val.ch_ary, ARRAY_SZ - 1);
+			strncpy(new->elem.ch_ary, (char *)val, ARRAY_SZ - 1);
 			new->elem.ch_ary[ARRAY_SZ-1] = '\0';
 			break;
 		default: err();
