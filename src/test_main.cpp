@@ -21,7 +21,7 @@ void
 test_insert()
 {
 	vector<int> v;
-	gen_rand(v, 100);
+	gen_rand(v, 1000);
 	printvec(v);
 	insert(v);
 	printvec(v);

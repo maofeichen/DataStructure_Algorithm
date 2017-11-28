@@ -41,5 +41,5 @@ insertion.o : $(SRC)insertion.cpp
 #	cc -c src/common.c
 
 clean :
-	rm -f $(DIR_OBJS)*.o 
+	rm -f test $(DIR_OBJS)*.o 
 #	rm bin/test_heap src/queue/heap.o
