@@ -5,16 +5,24 @@
 # ###################################################################### 
 
 CC 		= g++
-CF 		= -Wall -g
+CF 		= -Wall -g -std=c++11
 LF 		= -g
 
-OBJS	= ./build/
+DIR_OBJS	= ./build/
 SRC 	= ./src/
 INC 	= -Iinclude
 
+all : test
+
+test : test_main.o insertion.o
+	$(CC) $(LF) -o test $(DIR_OBJS)test_main.o $(DIR_OBJS)insertion.o 
+
+
+test_main.o : $(SRC)test_main.cpp
+	$(CC) $(INC) $(CF) -c $(SRC)test_main.cpp -o $(DIR_OBJS)test_main.o 
 
 insertion.o : $(SRC)insertion.cpp
-	$(CC) $(INC) $(CF) -c $(SRC)insertion.cpp -o $(OBJS)insertion.o 
+	$(CC) $(INC) $(CF) -c $(SRC)insertion.cpp -o $(DIR_OBJS)insertion.o 
 
 # test_heap : heap.o src/queue/test_heap.c common.o
 # 	cc -o bin/test_heap heap.o src/queue/test_heap.c -lm \
@@ -33,5 +41,5 @@ insertion.o : $(SRC)insertion.cpp
 #	cc -c src/common.c
 
 clean :
-	rm -f $(OBJS)*.o 
+	rm -f $(DIR_OBJS)*.o 
 #	rm bin/test_heap src/queue/heap.o
