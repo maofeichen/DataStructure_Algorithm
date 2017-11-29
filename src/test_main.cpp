@@ -1,30 +1,24 @@
 #include "insertion.h"
 
+#include <ctime>
+#include <cstdlib>
 #include <iostream>
 #include <vector>
-#include "stdlib.h"
-#include "time.h"
+// #include "stdlib.h"
+// #include "time.h"
 
 using namespace std;
 
-void test_insert();
-void gen_rand(vector<int>& v, int n);
-void printvec(vector<int>& v);
-
-int main(int argc, char const *argv[])
-{
-	test_insert();
-	return 0;
-}
-
 void 
-test_insert()
+printvec(vector<int>& v)
 {
-	vector<int> v;
-	gen_rand(v, 1000);
-	printvec(v);
-	insert(v);
-	printvec(v);
+	cout << "total random number\t" << dec << v.size() << endl;
+	for(int i = 0; i < v.size(); i++) {
+		cout << dec << v[i] << " ";
+		if(i != 0 && i % 16 == 0)
+			cout << "\n";
+	}	
+	cout << "\n";
 }
 
 void 
@@ -38,13 +32,25 @@ gen_rand(vector<int>& v, int n)
 }
 
 void 
-printvec(vector<int>& v)
+test_insert()
 {
-	cout << "total random number\t" << dec << v.size() << endl;
-	for(int i = 0; i < v.size(); i++) {
-		cout << dec << v[i] << " ";
-		if(i != 0 && i % 16 == 0)
-			cout << "\n";
-	}	
-	cout << "\n";
+	clock_t start;
+	double duration;
+	vector<int> v;
+
+	gen_rand(v, 100000);
+	// printvec(v);
+
+	start = clock();
+	algrthm::insert(v);
+	duration = (clock() - start) / (double) CLOCKS_PER_SEC;
+	cout << "total time sort:\t" << dec << duration << " s" << endl;
+
+	// printvec(v);
+}
+
+int main(int argc, char const *argv[])
+{
+	test_insert();
+	return 0;
 }
