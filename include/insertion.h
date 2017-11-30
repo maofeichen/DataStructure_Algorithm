@@ -1,18 +1,10 @@
 #ifndef INSERTION_H
 #define INSERTION_H
 
+#include "util.h"
 #include <vector>
 
 namespace algrthm{
-
-template <typename T>
-void 
-swap(T& a, T& b)
-{
-	T t = a;
-	a = b;
-	b = t;	
-}
 
 // insertion sort
 template <typename T>
@@ -26,10 +18,13 @@ void insert(std::vector<T>& v)
 	// 	}
 	// }
 
-	for(int i = 1; i < v.size(); i++) {
-		for(int j = i; j >=0; j--) {
+	for(auto i = 1; i < v.size(); i++) {
+		for(auto j = i; j > 0; j--) {
 			if(v[j-1] > v[j]) {
 				swap(v[j-1], v[j]);
+				// swap_inplace(v[j-1], v[j]);
+			} else{
+				break;
 			}
 		}
 	}

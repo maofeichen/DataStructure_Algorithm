@@ -4,8 +4,6 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
-// #include "stdlib.h"
-// #include "time.h"
 
 using namespace std;
 
@@ -13,7 +11,7 @@ void
 printvec(vector<int>& v)
 {
 	cout << "total random number\t" << dec << v.size() << endl;
-	for(int i = 0; i < v.size(); i++) {
+	for(unsigned int i = 0; i < v.size(); i++) {
 		cout << dec << v[i] << " ";
 		if(i != 0 && i % 16 == 0)
 			cout << "\n";
@@ -38,7 +36,7 @@ test_insert()
 	double duration;
 	vector<int> v;
 
-	gen_rand(v, 100000);
+	gen_rand(v, 10000);
 	// printvec(v);
 
 	start = clock();
