@@ -20,7 +20,8 @@ void insert(std::vector<T>& v)
 
 	for(auto i = 1; i < v.size(); i++) {
 		for(auto j = i; j > 0; j--) {
-			if(v[j-1] > v[j]) {
+			// if(v[j-1] > v[j]) {
+			if(less(v[j], v[j-1]) ) {			
 				swap(v[j-1], v[j]);
 				// swap_inplace(v[j-1], v[j]);
 			} else{
